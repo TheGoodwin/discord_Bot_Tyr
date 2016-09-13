@@ -1,6 +1,6 @@
 {
   "name": "tyr-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bot for the Discord app",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/SoulMourne/discordBot_Tyr/issues"
   },
-  "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme"
+  "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme",
+  "dependencies": {
+    "discord.js": "^9.2.0"
+  }
 }
