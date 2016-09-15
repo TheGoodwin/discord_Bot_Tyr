@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const AuthDetails = require("./auth.json");
 const Properties = require("./package.json");
-const ModuleLoader = require("./libs/module_loader.js");
+var ModuleLoader = require("./libs/module_loader.js");
 
 //const Commands = require("./bot_modules/commands.js")(bot);
 
