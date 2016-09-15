@@ -1,0 +1,32 @@
+{
+    "0" : {
+        "name" : "bye",
+        "description" : "Disconnect safely the bot",
+        "parameters" : "none"
+    },
+    "1" : {
+        "name" : "help",
+        "description" : "Reply with a list of the native commands and the loaded modules commands",
+        "parameters" : "none",
+    },
+    "2" : {
+        "name" : "load <modulenames>",
+        "description" : "Load the specified modules",
+        "parameters" : {
+            "<modulenames>" : "One or more module name (separated by a space) for the bot to load"
+        }
+    },
+    "3" : {
+        "name" : "status",
+        "description" : "Send a message presenting the bot status and the module loaded",
+        "parameters" : "none"
+    },
+    "4" : {
+        "name" : "ccm [-r | -reset] <marker>",
+        "description" : "Change the command marker with the specified one so that there is no conflict with other bots",
+        "parameters" : {
+            "<marker>" : "The new marker to use in order to launch commands",
+            "-r, --reset" : "Reset the marker to the default one (being `&`)"
+        }
+    }
+}
