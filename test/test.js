@@ -29,7 +29,7 @@ function testFormatCommand1() {
     };
     let expected = "`- load <modulenames> : Load the specified modules\n"
     + "\tParameters : \n"
-    + "\t\t<modulenames> : One or more module name (separated by a space) for the bot to load\n`";
+    + "\t\t<modulenames> : One or more module name (separated by a space) for the bot to load`\n";
     let result = MessageFormat.formatCommand(command);
     assert.deepEqual(result,expected);
 }
@@ -45,7 +45,7 @@ function testFormatCommand2() {
         "parameters" : "none"
     };
     let expected = "`- status : Send a message presenting the bot status and the module loaded\n"
-    + "\tNo parameters\n`";
+    + "\tNo parameters`\n";
     let result = MessageFormat.formatCommand(command);
     assert.deepEqual(result,expected);
 }
@@ -66,7 +66,7 @@ function testFormatCommand3() {
     let expected = "`- ccm [-r | -reset] <marker> : Change the command marker with the specified one so that there is no conflict with other bots\n"
     + "\tParameters : \n"
     + "\t\t<marker> : The new marker to use in order to launch commands\n"
-    + "\t\t-r, --reset : Reset the marker to the default one (being `&`)\n`";
+    + "\t\t-r, --reset : Reset the marker to the default one (being `&`)`\n";
     let result = MessageFormat.formatCommand(command);
     assert.deepEqual(result,expected);
 }

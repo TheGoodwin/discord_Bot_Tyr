@@ -11,18 +11,18 @@ module.exports = {
 		
 		//If there is no parameters, display it
 		if (command.parameters == "none") {
-		    str +=  "\tNo parameters\n"
+		    str +=  "\tNo parameters"
 		} else { //Or display all the parameters
-		    str += "\tParameters : \n"
+		    str += "\tParameters : "
 		    for (var i in Object.keys(command.parameters))
 		    {
 		        var parameter = Object.keys(command.parameters)[i];
-		        str += "\t\t" + parameter + " : " + command.parameters[parameter] + "\n";
+		        str += "\n\t\t" + parameter + " : " + command.parameters[parameter];
 		    }
 		}
 		
 		//Ends the string formatting
-		str += "`";
+		str += "`\n";
 		
 		//Returns the string
 		return str;
