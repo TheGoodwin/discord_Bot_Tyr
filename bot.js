@@ -63,6 +63,9 @@ bot.on('message', message => {
 					}, 2000);
 					
 					break;
+				case 'ccm' :
+					//TODO get the new command mark and change it
+					break;
 				default:
 					console.log("Use of command `" + command + "` not recognized");
 					break;
