@@ -1,3 +1,5 @@
+![Travis build](https://travis-ci.org/SoulMourne/discordBot_Tyr.svg?branch=master)
+
 # DiscordBot Tyr
 
 Tyr is a chat bot for discord using <a href="https://github.com/hydrabolt/discord.js/">discord.js</a>
