@@ -1,7 +1,7 @@
 {
     "0" : {
-        "path" : "commands.js",
-        "name" : "commands",
+        "path" : "base-commands/base-commands.js",
+        "name" : "base-commands",
         "description" : "Module allowing the use of commands to the users"
     }
 }
