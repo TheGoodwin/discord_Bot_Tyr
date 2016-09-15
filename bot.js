@@ -1,8 +1,11 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
 const AuthDetails = require("./auth.json");
 const Properties = require("./package.json");
 const Configuration = require("./conf/conf.json");
+const Commands = require("./commands.json");
+
+//Creates the bot
+const bot = new Discord.Client();
 
 //const Commands = require("./bot_modules/commands.js")(bot);
 
