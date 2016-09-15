@@ -8,8 +8,21 @@ const Configuration = require("./conf/conf.json");
 
 
 bot.on('ready', () => {
-	console.log('I am ready!');
-	//TODO add version number and say a startup message in the main channel
+	//Log the connection
+	console.log('====\nConnected to server\nCurrent version : '
+	+ Properties.version + "\n====");
+	
+	//Get the main channel of the server
+	let mainChannel = bot.channels.first();
+	
+	//Build a startup message
+	let message = bot.user + " , The Hand of Justice ready to serve you !\n"
+	+ "My current version is " + Properties.version + " !";
+	
+	//Send the startup message to the server and log it
+	mainChannel.sendMessage(message)
+	.then(message => console.log(`Sent message: ${message.content}`))
+	.catch(console.log);
 });
 
 bot.on('message', message => {
