@@ -23,7 +23,6 @@ bot.on('message', message => {
 			//TODO Show all the command from the loaded module
 		}
 	}
-	//TODO add commands to load modules	
 });
 
 bot.login(AuthDetails.token);
