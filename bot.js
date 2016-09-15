@@ -38,6 +38,9 @@ bot.on('message', message => {
 			//TODO : get and load the specified module
 		} else {
 			switch (command) {
+				case 'status' :
+					//TODO add code to send a message presenting the bot status and the module loaded
+					break;
 				case 'help':
 					//TODO add the help code
 					break;
