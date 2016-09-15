@@ -3,6 +3,7 @@ const AuthDetails = require("./auth.json");
 const Properties = require("./package.json");
 const Configuration = require("./conf/conf.json");
 const Commands = require("./commands.json");
+const MessageFormat = require("./libs/message_format.js");
 
 //Creates the bot
 const bot = new Discord.Client();
@@ -28,8 +29,9 @@ bot.on('ready', () => {
 	.catch(console.log);
 });
 
-bot.on('message', message => {
-	
+//When the bot records a new message on the server
+bot.on('message', msg => {
+	let message = msg;
 	//If the message is interpreted as a command to the bot
 	if (message.content.startsWith(Configuration.command_marker)) {
 		
@@ -45,21 +47,30 @@ bot.on('message', message => {
 					//TODO add code to send a message presenting the bot status and the module loaded
 					break;
 				case 'help':
-					for (let i = 0; i < Object.keys(Commands).length; i++) {
-						//TODO display each command
+					var response = "\n";
+					
+					//Builds the response to the user
+					for (var i in Object.keys(Commands)) {
+						var currentCommand = Object.keys(Commands)[i];
+						response += MessageFormat.formatCommand(Commands[currentCommand]);
 					}
-					//TODO add the help code
+					
+					//Sends the response to the user and logs it
+					message.reply(response)
+					.then(message => console.log(`Sent message: ${message.content}`))
+					.catch(console.log);
+					
 					break;
 				case 'bye' :
 					//Get the main channel of the server
 					let mainChannel = bot.channels.first();
 					
 					//Build a logout message
-					let message = bot.user + " , The Hand of Justice is retiring !\n"
+					let logoutMessage = bot.user + " , The Hand of Justice is retiring !\n"
 					+ "It was a pleasure to serve you all !";
 					
 					//Send the logout message to the server and log it
-					mainChannel.sendMessage(message)
+					mainChannel.sendMessage(logoutMessage)
 					.then(message => console.log(`Sent message: ${message.content}`))
 					.catch(console.log);
 					
