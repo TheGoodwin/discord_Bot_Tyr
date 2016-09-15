@@ -26,7 +26,7 @@
         "description" : "Change the command marker with the specified one so that there is no conflict with other bots",
         "parameters" : {
             "<marker>" : "The new marker to use in order to launch commands",
-            "-r, --reset" : "Reset the marker to the default one (being `&`)"
+            "-r, --reset" : "Reset the marker to the default one (being &)"
         }
     }
 }
