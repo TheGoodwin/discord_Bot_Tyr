@@ -7,7 +7,7 @@
     "1" : {
         "name" : "help",
         "description" : "Reply with a list of the native commands and the loaded modules commands",
-        "parameters" : "none",
+        "parameters" : "none"
     },
     "2" : {
         "name" : "load <modulenames>",
