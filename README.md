@@ -15,3 +15,6 @@ Before first run you will need to edit `auth.json` file. A bot token for a disco
 
 To start the bot just run
 `npm run startup`.
+
+# Coming next
+
