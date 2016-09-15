@@ -4,8 +4,8 @@
   "description": "Bot for the Discord app",
   "main": "index.js",
   "scripts": {
-    "test": "nodejs test/test.js",
-    "startup": "nodejs bot.js"
+    "test": "node test/test.js",
+    "startup": "node bot.js"
   },
   "repository": {
     "type": "git",
