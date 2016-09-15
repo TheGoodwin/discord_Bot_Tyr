@@ -45,6 +45,9 @@ bot.on('message', message => {
 					//TODO add code to send a message presenting the bot status and the module loaded
 					break;
 				case 'help':
+					for (let i = 0; i < Object.keys(Commands).length; i++) {
+						//TODO display each command
+					}
 					//TODO add the help code
 					break;
 				case 'bye' :
