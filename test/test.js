@@ -15,8 +15,11 @@ const MessageFormat = require("../libs/message_format.js");
  *    
 **/
 
+/**
+ * Test the formatCommand method with one parameter
+ **/ 
 function testFormatCommand1() {
-    console.dir("Processing to test the FormatCommand method 1");
+    console.log("Processing to test the FormatCommand method 1");
     var command = {
         "name" : "load <modulenames>",
         "description" : "Load the specified modules",
@@ -31,13 +34,53 @@ function testFormatCommand1() {
     assert.deepEqual(result,expected);
 }
 
-console.log("Tests running");
+/**
+ * Test the formatCommand method without parameter
+ **/ 
+function testFormatCommand2() {
+    console.log("Processing to test the FormatCommand method 2");
+    var command = {
+        "name" : "status",
+        "description" : "Send a message presenting the bot status and the module loaded",
+        "parameters" : "none"
+    };
+    let expected = "`- status : Send a message presenting the bot status and the module loaded\n"
+    + "\tNo parameters\n`";
+    let result = MessageFormat.formatCommand(command);
+    assert.deepEqual(result,expected);
+}
 
+/**
+ * Test the formatCommand method with at least two parameters
+ **/ 
+function testFormatCommand3() {
+    console.log("Processing to test the FormatCommand method 3");
+    var command = {
+        "name" : "ccm [-r | -reset] <marker>",
+        "description" : "Change the command marker with the specified one so that there is no conflict with other bots",
+        "parameters" : {
+            "<marker>" : "The new marker to use in order to launch commands",
+            "-r, --reset" : "Reset the marker to the default one (being `&`)"
+        }
+    };
+    let expected = "`- ccm [-r | -reset] <marker> : Change the command marker with the specified one so that there is no conflict with other bots\n"
+    + "\tParameters : \n"
+    + "\t\t<marker> : The new marker to use in order to launch commands\n"
+    + "\t\t-r, --reset : Reset the marker to the default one (being `&`)\n`";
+    let result = MessageFormat.formatCommand(command);
+    assert.deepEqual(result,expected);
+}
+
+console.log("Tests running");
+/**
+ * Add tests here
+ **/
 
 testFormatCommand1();
-//Add tests here
+testFormatCommand2();
+testFormatCommand3();
 
-//Add tests to check JSON files
+//TODO Add tests to check JSON files
 
 console.log("Tests completed");
 
