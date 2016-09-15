@@ -9,6 +9,7 @@ var ModuleLoader = require("./libs/module_loader.js");
 
 bot.on('ready', () => {
 	console.log('I am ready!');
+	//TODO add version number and say a startup message in the main channel
 });
 
 bot.on('message', message => {
