@@ -17,19 +17,19 @@ const Errors = require("./../libs/errors.js");
  * Just copy/paste and replace with your values
  * 
     function testMY_ERROR() {
-    console.log("Processing to test MY_ERROR construction");
-    try {
-        throw new Errors.MY_ERROR();
-    } catch (e) {
-        if (e instanceof Errors.MY_ERROR) {
-            var expected = 'MY_ERROR_MESSAGE';
-            assert.deepEqual(e.message, expected);
-            return;
+        console.log("Processing to test MY_ERROR construction");
+        try {
+            throw new Errors.MY_ERROR();
+        } catch (e) {
+            if (e instanceof Errors.MY_ERROR) {
+                var expected = 'MY_ERROR_MESSAGE';
+                assert.deepEqual(e.message, expected);
+                return;
+            }
         }
+        //If the exception was not get
+        assert(false);
     }
-    //If the exception was not get
-    assert(false);
-}
  *    
 **/
 
@@ -70,6 +70,38 @@ function testCommandGenerationError2() {
 }
 
 /**
+ * Tests the CommandEmptyError construction with a default message 
+ **/
+function testCommandEmptyError1() {
+    console.log("Processing to test CommandEmptyError construction");
+    try {
+        throw new Errors.CommandEmptyError();
+    } catch (e) {
+        if (e instanceof Errors.CommandEmptyError) {
+            var expected = 'The command is empty, can not do anything with it.';
+            assert.deepEqual(e.message, expected);
+            return;
+        }
+    }
+}
+
+/**
+ * Tests the CommandEmptyError construction with a custom message 
+ **/
+function testCommandEmptyError2() {
+    console.log("Processing to test CommandEmptyError construction");
+    try {
+        throw new Errors.CommandEmptyError("There is no command to get");
+    } catch (e) {
+        if (e instanceof Errors.CommandEmptyError) {
+            var expected = 'There is no command to get';
+            assert.deepEqual(e.message, expected);
+            return;
+        }
+    }
+}
+
+/**
  * Below this comment call your tests method
  **/
  
@@ -77,5 +109,8 @@ function testCommandGenerationError2() {
  
  testCommandGenerationError1();
  testCommandGenerationError2();
+ 
+ testCommandEmptyError1();
+ testCommandEmptyError2();
  
  console.log("Errors test completed");
