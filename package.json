@@ -19,5 +19,8 @@
   "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme",
   "dependencies": {
     "discord.js": "^9.2.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.13"
   }
 }
