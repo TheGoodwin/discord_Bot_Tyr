@@ -36,13 +36,14 @@ bot.on('message', msg => {
 	if (message.content.startsWith(Configuration.command_marker)) {
 		
 		//Get the command
-		let command = message.content.substring(1,message.content.length).toLowerCase();
-		
+		let command = message.content.substring(Configuration.command_marker.length,message.content.length).toLowerCase();
+		command = command.split(" ");
 		//Tests the command
-		if (command.startsWith("load")) {
-			//TODO : get and load the specified module
-		} else {
-			switch (command) {
+		
+			switch (command[0]) {
+				case 'load' : 
+					//TODO : get and load the specified module
+					break;
 				case 'status' :
 					//TODO add code to send a message presenting the bot status and the module loaded
 					break;
@@ -81,12 +82,13 @@ bot.on('message', msg => {
 					
 					break;
 				case 'ccm' :
-					//TODO get the new command mark and change it
+					//Get all the parameters
+					let parameters = command.shift(); //TODO make a getParameters functio
+						
 					break;
-				default:
+				default :
 					console.log("Use of command `" + command + "` not recognized");
 					break;
-			}
 		}
 	}
 });
