@@ -4,7 +4,7 @@
   "description": "Bot for the Discord app",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js",
+    "test": "sh test.sh",
     "startup": "node bot.js"
   },
   "repository": {
