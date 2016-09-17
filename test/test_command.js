@@ -94,15 +94,90 @@ function testCommandConstructor5() {
     assert(false);
 }
 
+/**
+ * Tests the getCommandName method with no parameter
+ **/
+function testGetCommandName1() {
+    console.log("Processing to test the getCommandName method 1");
+    let cmd = new Command("help");
+    let expected = "help";
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandName method with one parameter
+ **/
+function testGetCommandName2() {
+    console.log("Processing to test the getCommandName method 2");
+    let cmd = new Command("help param");
+    let expected = "help";
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandName method with at least 2 parameters
+ **/
+function testGetCommandName3() {
+    console.log("Processing to test the getCommandName method 3");
+    let cmd = new Command("help param1 param2");
+    let expected = "help";
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandParameters method with  no parameter
+ **/
+function testGetCommandParameters1() {
+    console.log("Processing to test the getCommandParameters method 1");
+    let cmd = new Command("help");
+    let expected = [];
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandParameters method with one parameter
+ **/
+function testGetCommandParameters2() {
+    console.log("Processing to test the getCommandParameters method 2");
+    let cmd = new Command("help param");
+    let expected = ["param"];
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandParameters method with at least 2 parameters
+ **/
+function testGetCommandParameters3() {
+    console.log("Processing to test the getCommandParameters method 3");
+    let cmd = new Command("help param1 param2");
+    let expected = ["param1", "param2"];
+    let result = cmd.getCommandName();
+    assert.deepEqual(result,expected);
+}
+
 console.log("Main tests running");
 /**
  * Add tests here
  **/
+ 
+ /** Construcor tests **/
 testCommandConstructor1();
 testCommandConstructor2();
 testCommandConstructor3();
 testCommandConstructor4();
 testCommandConstructor5();
+
+/** GetCommandName tests **/
+testGetCommandName1();
+testGetCommandName2();
+testGetCommandName3();
+
+/** GetCommandParameters tests **/
 
 
 console.log("Main tests completed");
