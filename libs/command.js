@@ -35,7 +35,9 @@ module.exports = {
          * Returns the command parameters
          **/
         getCommandParameters() {
-            return this.commandLine.split(" ").shift();
+            var res = this.commandLine.split(" ");
+            res.shift();
+            return res;
         }
         
     }

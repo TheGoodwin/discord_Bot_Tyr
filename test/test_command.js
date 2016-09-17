@@ -134,7 +134,7 @@ function testGetCommandParameters1() {
     console.log("Processing to test the getCommandParameters method 1");
     let cmd = new Command("help");
     let expected = [];
-    let result = cmd.getCommandName();
+    let result = cmd.getCommandParameters();
     assert.deepEqual(result,expected);
 }
 
@@ -145,7 +145,7 @@ function testGetCommandParameters2() {
     console.log("Processing to test the getCommandParameters method 2");
     let cmd = new Command("help param");
     let expected = ["param"];
-    let result = cmd.getCommandName();
+    let result = cmd.getCommandParameters();
     assert.deepEqual(result,expected);
 }
 
@@ -156,7 +156,7 @@ function testGetCommandParameters3() {
     console.log("Processing to test the getCommandParameters method 3");
     let cmd = new Command("help param1 param2");
     let expected = ["param1", "param2"];
-    let result = cmd.getCommandName();
+    let result = cmd.getCommandParameters();
     assert.deepEqual(result,expected);
 }
 
@@ -178,7 +178,9 @@ testGetCommandName2();
 testGetCommandName3();
 
 /** GetCommandParameters tests **/
-
+testGetCommandParameters1();
+testGetCommandParameters2();
+testGetCommandParameters3();
 
 console.log("Main tests completed");
 
