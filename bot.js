@@ -29,6 +29,11 @@ bot.on('ready', () => {
 	mainChannel.sendMessage(message)
 		.then(message => console.log(`Sent message: ${message.content}`))
 		.catch(console.log);
+		
+	//Update the status message
+	bot.user.setStatus('online', 'cm : ' + Configuration.command_marker)
+					.then(user => console.log('Changed status to ' + bot.user.status))
+					.catch(console.log);
 });
 
 //When the bot records a new message on the server
@@ -112,6 +117,10 @@ bot.on('message', msg => {
 					//Save the new Configuration
 					fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
 					console.log("Changed and saved the new configuration in the conf file");
+					//Update the bot status
+					bot.user.setStatus('online', 'cm : ' + Configuration.command_marker)
+						.then(user => console.log('Changed status to ' + bot.user.status))
+						.catch(console.log);
 				}
 				else {
 					let reply = "Error while changing the command marker. Did you pass a new command marker?\n" +
