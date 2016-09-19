@@ -4,7 +4,7 @@
   "description": "Bot for the Discord app",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js",
+    "test": "sh test.sh",
     "startup": "node bot.js"
   },
   "repository": {
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme",
   "dependencies": {
     "discord.js": "^9.2.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.13"
   }
 }

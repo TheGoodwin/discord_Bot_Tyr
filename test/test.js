@@ -71,7 +71,7 @@ function testFormatCommand3() {
     assert.deepEqual(result,expected);
 }
 
-console.log("Tests running");
+console.log("Main tests running");
 /**
  * Add tests here
  **/
@@ -82,6 +82,6 @@ testFormatCommand3();
 
 //TODO Add tests to check JSON files
 
-console.log("Tests completed");
+console.log("Main tests completed");
 
 process.exit(0);
