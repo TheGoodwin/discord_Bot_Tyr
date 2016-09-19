@@ -1,4 +1,5 @@
 const Errors = require("./errors.js");
+const Parameter = require("./parameter.js").Parameter;
 
 /**
  * TODO : add class command with getCommand and get Parameters
@@ -35,8 +36,13 @@ module.exports = {
          * Returns the command parameters
          **/
         getCommandParameters() {
-            var res = this.commandLine.split(" ");
-            res.shift();
+            var params = this.commandLine.split(" ");
+            params.shift();
+            var res = [];
+            for (var i = 0; i < params.length; i++){
+                let current = params[i];
+                res.push(new Parameter(current));
+            }
             return res;
         }
         
