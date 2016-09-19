@@ -1,6 +1,7 @@
 const assert = require("assert");
 const Command = require("./../libs/command.js").Command;
-const Errors = require("./../libs/errors.js");;
+const Parameter = require("./../libs/parameter.js").Parameter;
+const Errors = require("./../libs/errors.js");
 
 /**
  * Here is a skeleton for the various test methods
@@ -81,7 +82,7 @@ function testCommandConstructor5() {
  * Test if a non-valid command builds with an error
  * The expected error should be a CommandEmptyError
  **/
-function testCommandConstructor5() {
+function testCommandConstructor6() {
     console.log("Processing to test the Command constructor with expecting an error 3");
     try {
         new Command("   ");
@@ -144,8 +145,8 @@ function testGetCommandParameters1() {
 function testGetCommandParameters2() {
     console.log("Processing to test the getCommandParameters method 2");
     let cmd = new Command("help param");
-    let expected = ["param"];
-    let result = cmd.getCommandParameters();
+    let expected = "param";
+    let result = cmd.getCommandParameters()[0].getParameterName();
     assert.deepEqual(result,expected);
 }
 
@@ -155,8 +156,30 @@ function testGetCommandParameters2() {
 function testGetCommandParameters3() {
     console.log("Processing to test the getCommandParameters method 3");
     let cmd = new Command("help param1 param2");
-    let expected = ["param1", "param2"];
-    let result = cmd.getCommandParameters();
+    let expected = [new Parameter("param1"), new Parameter("param2")];
+    let result = [cmd.getCommandParameters()[0], cmd.getCommandParameters()[1]];
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandParameters return size method with one parameter
+ **/
+function testGetCommandParameters4() {
+    console.log("Processing to test the getCommandParameters method 4");
+    let cmd = new Command("help param");
+    let expected = 1;
+    let result = cmd.getCommandParameters().length;
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getCommandParameters method with at least 2 parameters
+ **/
+function testGetCommandParameters5() {
+    console.log("Processing to test the getCommandParameters method 5");
+    let cmd = new Command("help param1 param2");
+    let expected = 2;
+    let result = cmd.getCommandParameters().length;
     assert.deepEqual(result,expected);
 }
 
@@ -171,6 +194,7 @@ testCommandConstructor2();
 testCommandConstructor3();
 testCommandConstructor4();
 testCommandConstructor5();
+testCommandConstructor6();
 
 /** GetCommandName tests **/
 testGetCommandName1();
@@ -181,6 +205,8 @@ testGetCommandName3();
 testGetCommandParameters1();
 testGetCommandParameters2();
 testGetCommandParameters3();
+testGetCommandParameters4();
+testGetCommandParameters5();
 
 console.log("Main tests completed");
 
