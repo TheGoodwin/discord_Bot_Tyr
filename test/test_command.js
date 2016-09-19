@@ -81,7 +81,7 @@ function testCommandConstructor5() {
  * Test if a non-valid command builds with an error
  * The expected error should be a CommandEmptyError
  **/
-function testCommandConstructor5() {
+function testCommandConstructor6() {
     console.log("Processing to test the Command constructor with expecting an error 3");
     try {
         new Command("   ");
@@ -171,6 +171,7 @@ testCommandConstructor2();
 testCommandConstructor3();
 testCommandConstructor4();
 testCommandConstructor5();
+testCommandConstructor6();
 
 /** GetCommandName tests **/
 testGetCommandName1();
