@@ -16,7 +16,7 @@ Once you have node installed running `npm install` from the bot directory should
 Before first run you will need to edit `auth.json` file. A bot token for a discord account are required. 
 
 To start the bot just run
-`npm run startup`.
+`npm run start`.
 
 # Coming next
 

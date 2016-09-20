@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "sh test.sh",
-    "startup": "node bot.js"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
