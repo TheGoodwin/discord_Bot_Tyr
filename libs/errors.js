@@ -21,6 +21,15 @@ module.exports = {
             this.name = this.constructor.name;
             this.message = message || defaultMessage;
         }
+    },
+    
+    ModuleNotFoundError : class extends Error {
+        constructor(message) {
+            let defaultMessage = "The module could not be found";
+            super(message || defaultMessage);
+            this.name = this.constructor.name;
+            this.message = message || defaultMessage;
+        }
     }
     
     /**
