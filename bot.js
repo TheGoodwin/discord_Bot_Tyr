@@ -12,6 +12,7 @@ const fs = require("fs");
 //Creates the bot
 const bot = new Discord.Client();
 
+let loadedModules = [];
 //const Commands = require("./bot_modules/commands.js")(bot);
 
 //When the bot starts
@@ -52,15 +53,26 @@ bot.on('message', msg => {
 		switch (cmd.getCommandName().toLowerCase()) {
 			case 'load':
 				let reply = "";
-				if (cmd.getCommandParameters().length == 0) {
+				if (cmd.getCommandParameters().length == 0) { //If there is no parameters
 					let modules = ModuleLoader.listModules();
 					reply = "`Modules : `\n"
 					for (var i = 0; i < modules.length; i++) {
-						reply += "`- " + modules[i] + "`\n" 
+						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n" 
 					}
-					message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
-					.catch(console.log);
+				} else { //If there is at least one parameter
+					for (var i = 0; i < cmd.getCommandParameters().length ; i++) {
+						try {
+							var moduleName = cmd.getCommandParameters()[i].parameterName;
+							var modulePath = ModuleLoader.getModulePath(moduleName);
+							loadedModules.push(require("./bot_modules/" + modulePath)(bot));
+							reply += "Successfully loaded " + moduleName + "\n";
+						} catch (e) {
+							reply += e.message;
+						}
+					}
 				}
+				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
+					.catch(console.log);
 				break;
 			case 'status':
 				//TODO add code to send a message presenting the bot status and the module loaded
