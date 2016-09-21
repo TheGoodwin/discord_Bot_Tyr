@@ -102,6 +102,42 @@ function testCommandEmptyError2() {
 }
 
 /**
+ * Tests the ModuleNotFoundError construction with a default message 
+ **/
+function testModuleNotFoundError1() {
+    console.log("Processing to test ModuleNotFoundError construction 1");
+    try {
+        throw new Errors.ModuleNotFoundError();
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError) {
+            var expected = 'The module could not be found';
+            assert.deepEqual(e.message, expected);
+            return;
+        }
+    }
+    //If the exception was not get
+    assert(false);
+}
+
+/**
+ * Tests the ModuleNotFoundError construction with a custom message 
+ **/
+function testModuleNotFoundError2() {
+    console.log("Processing to test ModuleNotFoundError construction 2");
+    try {
+        throw new Errors.ModuleNotFoundError("Module Not Found Error");
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError) {
+            var expected = 'Module Not Found Error';
+            assert.deepEqual(e.message, expected);
+            return;
+        }
+    }
+    //If the exception was not get
+    assert(false);
+}
+
+/**
  * Below this comment call your tests method
  **/
  
@@ -112,5 +148,8 @@ function testCommandEmptyError2() {
  
  testCommandEmptyError1();
  testCommandEmptyError2();
+ 
+ testModuleNotFoundError1();
+ testModuleNotFoundError2();
  
  console.log("Errors test completed");

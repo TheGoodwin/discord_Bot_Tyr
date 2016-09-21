@@ -1,8 +1,8 @@
 /**
- * This is the module for the discord bot commands
+ * Module allowing the use of commands to the users
  **/
  
-const Properties = require("../package.json");
+const Properties = require("./../../package.json");
 
 module.exports = function(bot) {
     console.log("Initialization of bot commands.js module");

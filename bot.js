@@ -4,12 +4,15 @@ const Properties = require("./package.json");
 const Configuration = require("./conf/conf.json");
 const Commands = require("./commands.json");
 const MessageFormat = require("./libs/message_format.js");
+const ModuleLoader = require("./libs/module_loader.js");
 const Command = require("./libs/command.js").Command;
+const Parameter = require("./libs/parameter.js").Parameter;
 const fs = require("fs");
 
 //Creates the bot
 const bot = new Discord.Client();
 
+let loadedModules = [];
 //const Commands = require("./bot_modules/commands.js")(bot);
 
 //When the bot starts
@@ -49,7 +52,27 @@ bot.on('message', msg => {
 
 		switch (cmd.getCommandName().toLowerCase()) {
 			case 'load':
-				//TODO : get and load the specified module
+				let reply = "";
+				if (cmd.getCommandParameters().length == 0) { //If there is no parameters
+					let modules = ModuleLoader.listModules();
+					reply = "`Modules : `\n"
+					for (var i = 0; i < modules.length; i++) {
+						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n" 
+					}
+				} else { //If there is at least one parameter
+					for (var i = 0; i < cmd.getCommandParameters().length ; i++) {
+						try {
+							var moduleName = cmd.getCommandParameters()[i].parameterName;
+							var modulePath = ModuleLoader.getModulePath(moduleName);
+							loadedModules.push(require("./bot_modules/" + modulePath)(bot));
+							reply += "Successfully loaded " + moduleName + "\n";
+						} catch (e) {
+							reply += e.message;
+						}
+					}
+				}
+				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
+					.catch(console.log);
 				break;
 			case 'status':
 				//TODO add code to send a message presenting the bot status and the module loaded
@@ -92,8 +115,9 @@ bot.on('message', msg => {
 				//Check the number of parameters
 				if (cmd.getCommandParameters().length > 0) {
 					let reply = "";
+					let param = cmd.getCommandParameters()[0];
 					//Get the first parameter and change it in the JSON object
-					switch (cmd.getCommandParameters()[0]) {
+					switch (param.getParameterName()) {
 						//Replace the command marker with the default one
 						case '-r' :
 						case '-reset':
@@ -106,10 +130,14 @@ bot.on('message', msg => {
 								reply = "The command marker is already set to default (`&`)";
 							}
 							break;
-						default:
-							Configuration.command_marker = cmd.getCommandParameters()[0];
-							reply = "Successfully changed the command marker to `" + cmd.getCommandParameters()[0] +
-								"`. You may now use it to launch other commands";
+						default: //The command marker is changed
+							if (param.isMention()) {
+								reply = "The command marker cannot be a mention";
+							} else {
+								Configuration.command_marker = cmd.getCommandParameters()[0].getParameterName();
+								reply = "Successfully changed the command marker to `" + cmd.getCommandParameters()[0].getParameterName() +
+									"`. You may now use it to launch other commands";
+							}
 							break;
 					}
 					message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
