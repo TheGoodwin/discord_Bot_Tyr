@@ -67,7 +67,7 @@ bot.on('message', msg => {
 							loadedModules.push(require("./bot_modules/" + modulePath)(bot));
 							reply += "Successfully loaded " + moduleName + "\n";
 						} catch (e) {
-							reply += e.message;
+							reply += e.message + "\n";
 						}
 					}
 				}
