@@ -26,7 +26,7 @@ module.exports = {
 			i++;
 		}
 		if (description == "") {
-			throw new ModuleNotFoundError();
+			throw new ModuleNotFoundError("The module " + moduleName + " could not be found");
 		}
 		return description;
 	}
