@@ -15,6 +15,9 @@ module.exports = {
 		return modules;
 	},
 	
+	/**
+	 * Get the module description and returns it
+	 **/
 	getModuleDescription: function(moduleName) {
 		var description = "";
 		var i = 0; //Count the module
@@ -29,5 +32,24 @@ module.exports = {
 			throw new ModuleNotFoundError("The module " + moduleName + " could not be found");
 		}
 		return description;
+	},
+	
+	/**
+	 * Get the module path and returns it
+	 **/
+	getModulePath : function(moduleName) {
+		var path = "";
+		var i = 0; //Count the module
+		while (path == "" && i < Object.keys(Modules).length)
+		{
+			if (moduleName.toLowerCase() == Modules[i].name.toLowerCase()) {
+				path = Modules[i].path;
+			}
+			i++;
+		}
+		if (path == "") {
+			throw new ModuleNotFoundError("The module " + moduleName + " could not be found");
+		}
+		return path;
 	}
 }

@@ -60,7 +60,52 @@ function testGetModuleDescriptionMethod3() {
     }
     assert(false);
 }
+ 
+/**
+ * Tests the getModulePath method with a valid module name
+ **/
+function testGetModulePathMethod1() {
+    console.log("Processing to test the getModulePath method 1");
     
+    let expected = "base-commands/base-commands.js";
+    let result = ModuleLoader.getModulePath("base-commands");
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getModulePath method with an empty module name
+ **/
+function testGetModulePathMethod2() {
+    console.log("Processing to test the getModulePath method 2");
+    try {
+        ModuleLoader.getModulePath("");
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError)
+        {
+            assert(true);
+            return;
+        }
+    }
+    assert(false);
+}
+
+/**
+ * Tests the getModuleDescription method with an wrong module name
+ **/
+function testGetModulePathMethod3() {
+    console.log("Processing to test the getModulePath method 3");
+    try {
+        ModuleLoader.getModulePath("wrongmodulename");
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError)
+        {
+            assert(true);
+            return;
+        }
+    }
+    assert(false);
+}
+
 console.log("Module_Loader tests running");
 /**
  * Add tests here
@@ -70,6 +115,11 @@ console.log("Module_Loader tests running");
 testGetModuleDescriptionMethod1();
 testGetModuleDescriptionMethod2();
 testGetModuleDescriptionMethod3();
+
+/** GetModulePath tests **/
+testGetModulePathMethod1();
+testGetModulePathMethod2();
+testGetModulePathMethod3();
 
 console.log("Module_Loader tests completed");
 
