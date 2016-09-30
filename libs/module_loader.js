@@ -51,5 +51,26 @@ module.exports = {
 			throw new ModuleNotFoundError("The module " + moduleName + " could not be found");
 		}
 		return path;
+	},
+	
+	/**
+	 * Load the module given its name
+	 * @param moduleName module name
+	 * @bot the bot client
+	 **/
+	loadModule : function(moduleName,bot) {
+		require("./../bot_modules/" + this.getModulePath(moduleName))(bot);
+		console.log("Successfully loaded " + moduleName);
+	},
+	
+	/**
+	 * Load all the modules given their names in the array
+	 * @param Array containing all the module name
+	 * @bot the bot client
+	 **/
+	loadModules : function(moduleNameArray,bot) {
+		for (var i = 0; i < moduleNameArray.length; i++) {
+			this.loadModule(moduleNameArray[i], bot);
+		}
 	}
 }
