@@ -63,7 +63,6 @@ bot.on('message', msg => {
 					for (var i = 0; i < cmd.getCommandParameters().length ; i++) {
 						try {
 							var moduleName = cmd.getCommandParameters()[i].parameterName;
-							var modulePath = ModuleLoader.getModulePath(moduleName);
 							if (moduleName in Configuration.modules) {
 								reply += "The module is already loaded";
 							} else {
