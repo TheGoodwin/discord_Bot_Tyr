@@ -64,8 +64,14 @@ bot.on('message', msg => {
 						try {
 							var moduleName = cmd.getCommandParameters()[i].parameterName;
 							var modulePath = ModuleLoader.getModulePath(moduleName);
-							loadedModules.push(require("./bot_modules/" + modulePath)(bot));
-							reply += "Successfully loaded " + moduleName + "\n";
+							console.log(loadedModules);
+							console.log(moduleName in loadedModules);
+							if (moduleName in loadedModules) {
+								reply += "The module is already loaded";
+							} else {
+								loadedModules[moduleName] = require("./bot_modules/" + modulePath)(bot);
+								reply += "Successfully loaded " + moduleName + "\n";
+							}
 						} catch (e) {
 							reply += e.message + "\n";
 						}
@@ -75,6 +81,7 @@ bot.on('message', msg => {
 					.catch(console.log);
 				break;
 			case 'status':
+				
 				//TODO add code to send a message presenting the bot status and the module loaded
 				break;
 			case 'help':
