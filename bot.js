@@ -40,19 +40,19 @@ bot.on('ready', () => {
 });
 
 //When the bot records a new message on the server
-bot.on('message', msg => {
-	let message = msg;
+bot.on('message', message => {
 	//If the message is interpreted as a command to the bot
 	if (message.content.startsWith(Configuration.command_marker)) {
 
 		//Get the command
 		let cmd = new Command(message.content.substring(Configuration.command_marker.length, message.content.length));
+		
+		//Create a reply variable
+		let reply = "";
 
 		//Tests the command
-
 		switch (cmd.getCommandName().toLowerCase()) {
 			case 'load':
-				let reply = "";
 				if (cmd.getCommandParameters().length == 0) { //If there is no parameters
 					let modules = ModuleLoader.listModules();
 					reply = "`Modules : `\n"
@@ -80,8 +80,22 @@ bot.on('message', msg => {
 					.catch(console.log);
 				break;
 			case 'status':
-				
-				//TODO add code to send a message presenting the bot status and the module loaded
+				var moduleString = "";
+				for (var i = 0; i < Configuration.modules.length; i++) {
+					moduleString += Configuration.modules[i] + "; ";
+				}
+				if (moduleString == "") {
+					moduleString = "None";
+				}
+				reply += "\n";
+				reply += "Name : Tyr Bot\n";
+				reply += "Description : " + Properties.description + "\n";
+				reply += "Version : " + Properties.version + "\n";
+				reply += "Authors : " + Properties.author + "\n";
+				reply += "Loaded modules : " + moduleString + "\n";
+				reply += "Command marker : " + Configuration.command_marker;
+				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
+					.catch(console.log);
 				break;
 			case 'help':
 				var response = "\n";
@@ -120,7 +134,6 @@ bot.on('message', msg => {
 			case 'ccm':
 				//Check the number of parameters
 				if (cmd.getCommandParameters().length > 0) {
-					let reply = "";
 					let param = cmd.getCommandParameters()[0];
 					//Get the first parameter and change it in the JSON object
 					switch (param.getParameterName()) {
@@ -157,7 +170,7 @@ bot.on('message', msg => {
 						.catch(console.log);
 				}
 				else {
-					let reply = "Error while changing the command marker. Did you pass a new command marker?\n" +
+					reply = "Error while changing the command marker. Did you pass a new command marker?\n" +
 						"Type the " + Configuration.command_marker + "help command for more information.";
 					message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
 						.catch(console.log);
