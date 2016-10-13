@@ -12,8 +12,6 @@ const fs = require("fs");
 //Creates the bot
 const bot = new Discord.Client();
 
-let loadedModules = [];
-//const Commands = require("./bot_modules/commands.js")(bot);
 
 //When the bot starts
 bot.on('ready', () => {
@@ -33,6 +31,8 @@ bot.on('ready', () => {
 		.then(message => console.log(`Sent message: ${message.content}`))
 		.catch(console.log);
 		
+	ModuleLoader.loadModules(Configuration.modules,bot);
+	
 	//Update the status message
 	bot.user.setStatus('online', 'cm : ' + Configuration.command_marker)
 					.then(user => console.log('Changed status to ' + bot.user.status))
@@ -63,9 +63,14 @@ bot.on('message', msg => {
 					for (var i = 0; i < cmd.getCommandParameters().length ; i++) {
 						try {
 							var moduleName = cmd.getCommandParameters()[i].parameterName;
-							var modulePath = ModuleLoader.getModulePath(moduleName);
-							loadedModules.push(require("./bot_modules/" + modulePath)(bot));
-							reply += "Successfully loaded " + moduleName + "\n";
+							if (moduleName in Configuration.modules) {
+								reply += "The module is already loaded";
+							} else {
+								ModuleLoader.loadModule(moduleName,bot);
+								Configuration.modules[Configuration.modules.length] = moduleName;
+								fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
+								reply += "Successfully loaded " + moduleName + "\n";
+							}
 						} catch (e) {
 							reply += e.message + "\n";
 						}
@@ -75,6 +80,7 @@ bot.on('message', msg => {
 					.catch(console.log);
 				break;
 			case 'status':
+				
 				//TODO add code to send a message presenting the bot status and the module loaded
 				break;
 			case 'help':
