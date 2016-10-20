@@ -44,6 +44,8 @@ bot.on('message', message => {
 	//If the message is interpreted as a command to the bot
 	if (message.content.startsWith(Configuration.command_marker)) {
 
+		let reply = "";
+
 		//Get the command
 		let cmd = new Command(message.content.substring(Configuration.command_marker.length, message.content.length));
 		
@@ -54,18 +56,19 @@ bot.on('message', message => {
 		switch (cmd.getCommandName().toLowerCase()) {
 			case 'load':
 				if (cmd.getCommandParameters().length == 0) { //If there is no parameters
+					//Show the list of modules
 					let modules = ModuleLoader.listModules();
 					reply = "`Modules : `\n"
 					for (var i = 0; i < modules.length; i++) {
 						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n" 
 					}
 				} else { //If there is at least one parameter
-					for (var i = 0; i < cmd.getCommandParameters().length ; i++) {
+					for (var i = 0; i < cmd.getCommandParameters().length ; i++) { //For every module passed
 						try {
-							var moduleName = cmd.getCommandParameters()[i].parameterName;
-							if (moduleName in Configuration.modules) {
+							var moduleName = cmd.getCommandParameters()[i].parameterName; //get the passed name
+							if (moduleName in Configuration.modules) { //Check if the module is already loaded
 								reply += "The module is already loaded";
-							} else {
+							} else { // Load the module if it is found
 								ModuleLoader.loadModule(moduleName,bot);
 								Configuration.modules[Configuration.modules.length] = moduleName;
 								fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
@@ -79,6 +82,29 @@ bot.on('message', message => {
 				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
 					.catch(console.log);
 				break;
+			case 'unload' :
+				if (cmd.getCommandParameters().length == 0) { //If there is no parameters, sends an error
+					reply += "A parameter is expected. Please see the help (" + Configuration.command_marker + "help)";
+				} else { // If there is at least one parameter
+					for (var i = 0; i < cmd.getCommandParameters().length; i++) { // For each parameter (module name) passed
+						var index = -1; //Sets an index at -1
+						for (var j = 0; j < Configuration.modules.length; j++) { //Search if the modules exists
+							if (Configuration.modules[i] == cmd.getCommandParameters()[j].parameterName) {
+								index = j;
+							}
+						}
+						if (index != -1) { //If the module was found, remove him from the configuration file
+							Configuration.modules.splice(i,1);
+							fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
+							reply += cmd.getCommandParameters()[j] + "successfully removed. Please restart the bot to apply the changes."
+						} else {//If the module was not found, tell the clien
+							reply += "Module not loaded or found (" + cmd.getCommandParameters()[j] +")";
+						}
+					}
+				}
+				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
+					.catch(console.log);
+				break;	
 			case 'status':
 				var moduleString = "";
 				for (var i = 0; i < Configuration.modules.length; i++) {
