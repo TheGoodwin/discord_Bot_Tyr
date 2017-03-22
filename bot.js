@@ -30,9 +30,9 @@ bot.on('ready', () => {
 	mainChannel.sendMessage(message)
 		.then(message => console.log(`Sent message: ${message.content}`))
 		.catch(console.log);
-		
+
 	ModuleLoader.loadModules(Configuration.modules,bot);
-	
+
 	//Update the status message
 	bot.user.setStatus('online', 'cm : ' + Configuration.command_marker)
 					.then(user => console.log('Changed status to ' + bot.user.status))
@@ -44,11 +44,9 @@ bot.on('message', message => {
 	//If the message is interpreted as a command to the bot
 	if (message.content.startsWith(Configuration.command_marker)) {
 
-		let reply = "";
-
 		//Get the command
 		let cmd = new Command(message.content.substring(Configuration.command_marker.length, message.content.length));
-		
+
 		//Create a reply variable
 		let reply = "";
 
@@ -60,7 +58,7 @@ bot.on('message', message => {
 					let modules = ModuleLoader.listModules();
 					reply = "`Modules : `\n"
 					for (var i = 0; i < modules.length; i++) {
-						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n" 
+						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n"
 					}
 				} else { //If there is at least one parameter
 					for (var i = 0; i < cmd.getCommandParameters().length ; i++) { //For every module passed
@@ -104,7 +102,7 @@ bot.on('message', message => {
 				}
 				message.reply(reply).then(message => console.log(`Sent message: ${message.content}`))
 					.catch(console.log);
-				break;	
+				break;
 			case 'status':
 				var moduleString = "";
 				for (var i = 0; i < Configuration.modules.length; i++) {
