@@ -94,7 +94,7 @@ bot.on('message', message => {
 						if (index != -1) { //If the module was found, remove him from the configuration file
 							Configuration.modules.splice(i,1);
 							fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
-							reply += cmd.getCommandParameters()[i].parameterName + "successfully removed. Please restart the bot to apply the changes."
+							reply += cmd.getCommandParameters()[i].parameterName + " successfully removed. Please restart the bot to apply the changes."
 						} else {//If the module was not found, tell the clien
 							reply += "Module not loaded or found (" + cmd.getCommandParameters()[i].parameterName +")";
 						}
