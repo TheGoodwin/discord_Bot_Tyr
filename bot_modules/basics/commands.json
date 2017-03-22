@@ -1,0 +1,12 @@
+{
+    "0" : {
+        "name" : "ping",
+        "description" : "Ask the bot for an answer (being \"ping\")",
+        "parameters" : "none"
+    },
+    "1" : {
+        "name" : "pong",
+        "description" : "Ask the bot for an answer (being \"pong\")",
+        "parameters" : "none"
+    }
+}

@@ -28,5 +28,12 @@
             "<marker>" : "The new marker to use in order to launch commands",
             "-r, --reset" : "Reset the marker to the default one (being &)"
         }
+    },
+    "5" : {
+        "name" : "unload <modulenames>",
+        "description" : "Unload the specified modules",
+        "parameters" : {
+            "<modulenames>" : "One or more loaded module name (separated by a space) for the bot to unload"
+        }
     }
 }
