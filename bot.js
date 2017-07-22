@@ -39,6 +39,11 @@ bot.on('ready', () => {
 					.catch(console.log);
 });
 
+bot.on('reconnecting', () => {
+	console.log("Error during connection, reconnecting");
+	bot.destroy().then(bot.login(AuthDetails.token));
+});
+
 //When the bot records a new message on the server
 bot.on('message', message => {
 	//If the message is interpreted as a command to the bot

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "sh test.sh",
-    "start": "node bot.js"
+    "start": "sh start.sh"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme",
   "dependencies": {
-    "discord.js": "^11.1.0"
+    "discord.js": "^11.1.0",
+    "pm2": "^2.6.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.13"
