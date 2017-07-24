@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/SoulMourne/discordBot_Tyr#readme",
   "dependencies": {
-    "discord.js": "^11.1.0",
-    "pm2": "^2.6.1"
+    "discord.js": "^11.1.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.13"
