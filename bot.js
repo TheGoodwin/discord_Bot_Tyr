@@ -27,7 +27,7 @@ bot.on('ready', () => {
 		"My current version is " + Properties.version + " !";
 
 	//Send the startup message to the server and log it
-	mainChannel.sendMessage(message)
+	mainChannel.send(message)
 		.then(message => console.log(`Sent message: ${message.content}`))
 		.catch(console.log);
 
