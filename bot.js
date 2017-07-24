@@ -143,14 +143,14 @@ bot.on('message', message => {
 				break;
 			case 'bye':
 				//Get the main channel of the server
-				let mainChannel = bot.channels.first();
+				let channel = message.channel;
 
 				//Build a logout message
 				let logoutMessage = bot.user + " , The Hand of Justice is retiring !\n" +
 					"It was a pleasure to serve you all !";
 
 				//Send the logout message to the server and log it
-				mainChannel.sendMessage(logoutMessage)
+				channel.send(logoutMessage)
 					.then(message => console.log(`Sent message: ${message.content}`))
 					.catch(console.log);
 
