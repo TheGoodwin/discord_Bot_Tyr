@@ -7,6 +7,7 @@ const MessageFormat = require("./libs/message_format.js");
 const ModuleLoader = require("./libs/module_loader.js");
 const Command = require("./libs/command.js").Command;
 const Parameter = require("./libs/parameter.js").Parameter;
+const Utilities = require("./libs/utilities.js");
 const fs = require("fs");
 
 //Creates the bot
@@ -119,6 +120,7 @@ bot.on('message', message => {
 				reply += "\n";
 				reply += "Name : Tyr Bot\n";
 				reply += "Description : " + Properties.description + "\n";
+				reply += "Uptime : " + Utilities.millisecondsToString(bot.uptime) + "\n";
 				reply += "Version : " + Properties.version + "\n";
 				reply += "Authors : " + Properties.author + "\n";
 				reply += "Loaded modules : " + moduleString + "\n";
