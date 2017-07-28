@@ -2,7 +2,7 @@
   "name": "tyr-bot",
   "version": "0.0.8",
   "description": "Bot for the Discord app",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "sh test.sh",
     "start": "sh start.sh"
