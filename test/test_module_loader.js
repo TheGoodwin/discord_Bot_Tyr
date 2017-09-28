@@ -1,4 +1,4 @@
-const ModuleLoader = require("./../libs/module_loader.js");
+const ModuleLoader = require("./../libs/module_loader.js").ModuleLoader;
 const assert = require("assert");
 const Errors = require("./../libs/errors.js");
 
@@ -23,7 +23,7 @@ function testGetModuleDescriptionMethod1() {
     console.log("Processing to test the getModuleDescription method 1");
 
     let expected = "Module allowing the use of commands to the users";
-    let result = ModuleLoader.getModuleDescription("basics");
+    let result = new ModuleLoader().getModuleDescription("basics");
     assert.deepEqual(result,expected);
 }
 
@@ -33,7 +33,7 @@ function testGetModuleDescriptionMethod1() {
 function testGetModuleDescriptionMethod2() {
     console.log("Processing to test the getModuleDescription method 2");
     try {
-        ModuleLoader.getModuleDescription("");
+        new ModuleLoader().getModuleDescription("");
     } catch (e) {
         if (e instanceof Errors.ModuleNotFoundError)
         {
@@ -50,7 +50,7 @@ function testGetModuleDescriptionMethod2() {
 function testGetModuleDescriptionMethod3() {
     console.log("Processing to test the getModuleDescription method 3");
     try {
-        ModuleLoader.getModuleDescription("wrongmodulename");
+        new ModuleLoader().getModuleDescription("wrongmodulename");
     } catch (e) {
         if (e instanceof Errors.ModuleNotFoundError)
         {
@@ -64,21 +64,21 @@ function testGetModuleDescriptionMethod3() {
 /**
  * Tests the getModulePath method with a valid module name
  **/
-function testGetModulePathMethod1() {
-    console.log("Processing to test the getModulePath method 1");
+function testGetModuleSourceCodePathMethod1() {
+    console.log("Processing to test the getModuleSourceCodePath method 1");
 
     let expected = "basics/basics.js";
-    let result = ModuleLoader.getModulePath("basics");
+    let result = new ModuleLoader().getModuleSourceCodePath("basics");
     assert.deepEqual(result,expected);
 }
 
 /**
  * Tests the getModulePath method with an empty module name
  **/
-function testGetModulePathMethod2() {
-    console.log("Processing to test the getModulePath method 2");
+function testGetModuleSourceCodePathMethod2() {
+    console.log("Processing to test the getModuleSourceCodePath method 2");
     try {
-        ModuleLoader.getModulePath("");
+        new ModuleLoader().getModuleSourceCodePath("");
     } catch (e) {
         if (e instanceof Errors.ModuleNotFoundError)
         {
@@ -92,10 +92,10 @@ function testGetModulePathMethod2() {
 /**
  * Tests the getModuleDescription method with an wrong module name
  **/
-function testGetModulePathMethod3() {
-    console.log("Processing to test the getModulePath method 3");
+function testGetModuleSourceCodePathMethod3() {
+    console.log("Processing to test the getModuleSourceCodePath method 3");
     try {
-        ModuleLoader.getModulePath("wrongmodulename");
+        new ModuleLoader().getModuleSourceCodePath("wrongmodulename");
     } catch (e) {
         if (e instanceof Errors.ModuleNotFoundError)
         {
@@ -104,6 +104,95 @@ function testGetModulePathMethod3() {
         }
     }
     assert(false);
+}
+
+/**
+ * Tests the getModuleCommandsPath method with a valid module name
+ **/
+function testGetModuleCommandsPathMethod1() {
+    console.log("Processing to test the getModuleCommandsPath method 1");
+
+    let expected = "basics/commands.json";
+    let result = new ModuleLoader().getModuleCommandsPath("basics");
+    assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the getModuleCommandsPath method with an empty module name
+ **/
+function testGetModuleCommandsPathMethod2() {
+    console.log("Processing to test the getModuleCommandsPath method 2");
+    try {
+        new ModuleLoader().getModuleCommandsPath("");
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError)
+        {
+            assert(true);
+            return;
+        }
+    }
+    assert(false);
+}
+
+/**
+ * Tests the getModuleCommandsPath method with an wrong module name
+ **/
+function testGetModuleCommandsPathMethod3() {
+    console.log("Processing to test the getModuleCommandsPath method 3");
+    try {
+        new ModuleLoader().getModuleCommandsPath("wrongmodulename");
+    } catch (e) {
+        if (e instanceof Errors.ModuleNotFoundError)
+        {
+            assert(true);
+            return;
+        }
+    }
+    assert(false);
+}
+
+/**
+ * Tests the isCommandInModule method with an existing command name
+ **/
+function testIsCommandInModuleMethod1() {
+  console.log("Processing to test the isCommandInModule method 1");
+
+  let expected = true;
+  let result = new ModuleLoader().isCommandInModule("basics", "ping");
+  assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the isCommandInModule method with a non-existing command name
+ **/
+function testIsCommandInModuleMethod2() {
+  console.log("Processing to test the isCommandInModule method 2");
+
+  let expected = false;
+  let result = new ModuleLoader().isCommandInModule("basics", "pang");
+  assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the isCommandInModuleArray method with an existing command name
+ **/
+function testIsCommandInModuleArrayMethod1() {
+  console.log("Processing to test the isCommandInModuleArray method 1");
+
+  let expected = true;
+  let result = new ModuleLoader().isCommandInModuleArray(["basics"], "ping");
+  assert.deepEqual(result,expected);
+}
+
+/**
+ * Tests the isCommandInModuleArray method with a non-existing command name
+ **/
+function testIsCommandInModuleArrayMethod2() {
+  console.log("Processing to test the isCommandInModuleArray method 2");
+
+  let expected = false;
+  let result = new ModuleLoader().isCommandInModuleArray(["basics"], "pang");
+  assert.deepEqual(result,expected);
 }
 
 console.log("Module_Loader tests running");
@@ -116,10 +205,23 @@ testGetModuleDescriptionMethod1();
 testGetModuleDescriptionMethod2();
 testGetModuleDescriptionMethod3();
 
-/** GetModulePath tests **/
-testGetModulePathMethod1();
-testGetModulePathMethod2();
-testGetModulePathMethod3();
+/** GetModuleSourceCodePath tests **/
+testGetModuleSourceCodePathMethod1();
+testGetModuleSourceCodePathMethod2();
+testGetModuleSourceCodePathMethod3();
+
+/** GetModuleCommandsPath tests **/
+testGetModuleCommandsPathMethod1();
+testGetModuleCommandsPathMethod2();
+testGetModuleCommandsPathMethod3();
+
+/** isInModule tests **/
+testIsCommandInModuleMethod1();
+testIsCommandInModuleMethod2();
+
+/** isInModuleArray tests **/
+testIsCommandInModuleArrayMethod2();
+testIsCommandInModuleArrayMethod1();
 
 console.log("Module_Loader tests completed");
 
