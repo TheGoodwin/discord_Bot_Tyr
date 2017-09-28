@@ -4,7 +4,7 @@ const Properties = require("./package.json");
 const Configuration = require("./conf/conf.json");
 const Commands = require("./commands.json");
 const MessageFormat = require("./libs/message_format.js");
-const ModuleLoader = require("./libs/module_loader.js");
+const ModuleLoader = require("./libs/module_loader.js").ModuleLoader;
 const Command = require("./libs/command.js").Command;
 const Parameter = require("./libs/parameter.js").Parameter;
 const Utilities = require("./libs/utilities.js");
@@ -13,6 +13,7 @@ const fs = require("fs");
 //Creates the bot
 const bot = new Discord.Client();
 
+const moduleLoader = new ModuleLoader();
 
 //When the bot starts
 bot.on('ready', () => {
@@ -32,7 +33,7 @@ bot.on('ready', () => {
 		.then(message => console.log(`Sent message: ${message.content}`))
 		.catch(console.log);
 
-	ModuleLoader.loadModules(Configuration.modules,bot);
+	moduleLoader.loadModules(Configuration.modules, bot);
 
 	//Update the status message
 	bot.user.setStatus('online', 'cm : ' + Configuration.command_marker)
@@ -58,22 +59,24 @@ bot.on('message', message => {
 
 		//Tests the command
 		switch (cmd.getCommandName().toLowerCase()) {
+			//TODO : Check if command is in file
 			case 'load':
 				if (cmd.getCommandParameters().length == 0) { //If there is no parameters
 					//Show the list of modules
-					let modules = ModuleLoader.listModules();
+					let modules = moduleLoader.listModules();
 					reply = "`Modules : `\n"
 					for (var i = 0; i < modules.length; i++) {
-						reply += "`- " + modules[i] + " : " + ModuleLoader.getModuleDescription(modules[i]) + "`\n"
+						reply += "`- " + modules[i] + " : " + moduleLoader.getModuleDescription(modules[i]) + "`\n"
 					}
 				} else { //If there is at least one parameter
 					for (var i = 0; i < cmd.getCommandParameters().length ; i++) { //For every module passed
 						try {
 							var moduleName = cmd.getCommandParameters()[i].parameterName; //get the passed name
+							//TODO get this in moduleLaoder
 							if (moduleName in Configuration.modules) { //Check if the module is already loaded
 								reply += "The module is already loaded";
 							} else { // Load the module if it is found
-								ModuleLoader.loadModule(moduleName,bot);
+								moduleLoader.loadModule(moduleName,bot);
 								Configuration.modules[Configuration.modules.length] = moduleName;
 								fs.writeFile("./conf/conf.json", JSON.stringify(Configuration));
 								reply += "Successfully loaded " + moduleName + "\n";
