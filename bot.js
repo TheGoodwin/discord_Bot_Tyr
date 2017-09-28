@@ -114,8 +114,8 @@ bot.on('message', message => {
 				break;
 			case 'status':
 				var moduleString = "";
-				for (var i = 0; i < Configuration.modules.length; i++) {
-					moduleString += Configuration.modules[i] + "; ";
+				for (var i = 0; i < moduleLoader.loadedModules.length; i++) {
+					moduleString += moduleLoader.loadedModules[i] + "; ";
 				}
 				if (moduleString == "") {
 					moduleString = "None";
