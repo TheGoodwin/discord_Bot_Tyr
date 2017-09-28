@@ -79,7 +79,7 @@ module.exports = {
 		 **/
 		listModules(){
 			var modules = [];
-			var modulesList = getModules();
+			var modulesList = this.getModules();
 			//Get all the names in the modules.json file and stack them in the `modules` variables
 			for (var i = 0; i < Object.keys(modulesList).length; i++) {
 					modules.push(modulesList[i].name);
