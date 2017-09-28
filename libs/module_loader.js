@@ -14,7 +14,7 @@ module.exports = {
 		console.log(modules);
 		return modules;
 	},
-	
+
 	/**
 	 * Get the module description and returns it
 	 **/
@@ -33,7 +33,7 @@ module.exports = {
 		}
 		return description;
 	},
-	
+
 	/**
 	 * Get the module path and returns it
 	 **/
@@ -52,21 +52,21 @@ module.exports = {
 		}
 		return path;
 	},
-	
+
 	/**
 	 * Load the module given its name
 	 * @param moduleName module name
-	 * @bot the bot client
+	 * @param bot the bot client
 	 **/
 	loadModule : function(moduleName,bot) {
 		require("./../bot_modules/" + this.getModulePath(moduleName))(bot);
 		console.log("Successfully loaded " + moduleName);
 	},
-	
+
 	/**
 	 * Load all the modules given their names in the array
-	 * @param Array containing all the module name
-	 * @bot the bot client
+	 * @param moduleNameArray Array containing all the module name
+	 * @param bot the bot client
 	 **/
 	loadModules : function(moduleNameArray,bot) {
 		for (var i = 0; i < moduleNameArray.length; i++) {
