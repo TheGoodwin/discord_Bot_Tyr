@@ -27,17 +27,6 @@ module.exports = {
 		}
 
 		/**
-		 * Load the modules from the configuration
-		 * @param configuration the configuration
-		 * @param bot the bot client
-		**/
-		loadModulesFromConfiguration(configuration, bot){
-			loadedModulesName = configuration.modules;
-			loadModules(loadedModulesName, bot);
-			return loadedModulesName;
-		}
-
-		/**
 		 * Load all the modules given their names in the array
 		 * @param moduleNameArray Array containing all the module name
 		 * @param bot the bot client
