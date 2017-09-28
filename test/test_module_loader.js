@@ -5,15 +5,15 @@ const Errors = require("./../libs/errors.js");
 /**
  * Here is a skeleton for the various test methods
  * Just copy/paste and replace with your values
- * 
+ *
     function testskeleton() {
         console.log("Processing to test the TESTSKELETON method");
-        
+
         let expected = "MY_EXPECTED_VALUES";
         let result = MY_FUNCTION_TO_TEST();
         assert.deepEqual(result,expected);
     }
- *    
+ *
 **/
 
 /**
@@ -21,9 +21,9 @@ const Errors = require("./../libs/errors.js");
  **/
 function testGetModuleDescriptionMethod1() {
     console.log("Processing to test the getModuleDescription method 1");
-    
+
     let expected = "Module allowing the use of commands to the users";
-    let result = ModuleLoader.getModuleDescription("base-commands");
+    let result = ModuleLoader.getModuleDescription("basics");
     assert.deepEqual(result,expected);
 }
 
@@ -60,15 +60,15 @@ function testGetModuleDescriptionMethod3() {
     }
     assert(false);
 }
- 
+
 /**
  * Tests the getModulePath method with a valid module name
  **/
 function testGetModulePathMethod1() {
     console.log("Processing to test the getModulePath method 1");
-    
-    let expected = "base-commands/base-commands.js";
-    let result = ModuleLoader.getModulePath("base-commands");
+
+    let expected = "basics/basics.js";
+    let result = ModuleLoader.getModulePath("basics");
     assert.deepEqual(result,expected);
 }
 
