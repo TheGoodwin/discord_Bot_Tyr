@@ -39,6 +39,7 @@ module.exports = {
 
 		/**
 		 * Get the module source code path and returns it
+		 * @param moduleName the name of the module
 		 **/
 		getModuleSourceCodePath(moduleName) {
 			var path = "";
@@ -57,6 +58,10 @@ module.exports = {
 			return path;
 		}
 
+		/**
+		 * Get the module commands.json file path
+		 * @param moduleName the name of the module
+		**/
 		getModuleCommandsPath(moduleName) {
 			var path = this.getModuleSourceCodePath(moduleName);
 			return path.replace(/\/([^\/])*.js/, "/commands.json");
