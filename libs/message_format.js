@@ -33,7 +33,7 @@ module.exports = {
 	 * Returns a formatted string corresponfing to the display of a module name
 	 * @param the module name
 	 **/
-	 formatModuleName : function(moduleName) {
+	 formatModuleNameHeader : function(moduleName) {
 		 var str = "** Module `"+moduleName+"` : **\n"
 		 return str;
 	 }
