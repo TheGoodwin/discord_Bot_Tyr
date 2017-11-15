@@ -37,7 +37,8 @@ module.exports = function(bot) {
             for (var i = 0; i < cmd.getCommandParameters().length; i++) { //For every module passed
               try {
                 var moduleName = cmd.getCommandParameters()[i].parameterName; //get the passed
-                if (moduleName in moduleLoader.loadedModules) { //Check if the module is already loaded
+                console.log(moduleLoader.loadedModules.indexOf(moduleName))
+                if (moduleLoader.loadedModules.indexOf(moduleName) > -1) { //Check if the module is already loaded
                   reply += "The module is already loaded";
                 } else { // Load the module if it is found
                   moduleLoader.loadModule(moduleName, bot);

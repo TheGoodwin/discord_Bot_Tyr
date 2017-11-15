@@ -22,9 +22,11 @@ module.exports = {
 		 * @param bot the bot client
 		 **/
 		loadModule(moduleName,bot) {
-			require("./../bot_modules/" + this.getModuleSourceCodePath(moduleName))(bot, arguments[2]);
-			console.log("Successfully loaded " + moduleName);
-			this.loadedModules.push(moduleName);
+			if (!this.loadedModules.indexOf(moduleName) > -1) { //If the module is not already loaded
+				require("./../bot_modules/" + this.getModuleSourceCodePath(moduleName))(bot, arguments[2]);
+				console.log("Successfully loaded " + moduleName);
+				this.loadedModules.push(moduleName);
+			}
 		}
 
 		/**
