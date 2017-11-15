@@ -27,7 +27,7 @@ module.exports = {
 
 		//Returns the string
 		return str;
-	}
+	},
 
 	/**
 	 * Returns a formatted string corresponfing to the display of a module name
