@@ -13,6 +13,7 @@ module.exports = {
 		constructor() {
 
 			this.loadedModules = [];
+
 		}
 
 		/**
@@ -21,7 +22,7 @@ module.exports = {
 		 * @param bot the bot client
 		 **/
 		loadModule(moduleName,bot) {
-			require("./../bot_modules/" + this.getModuleSourceCodePath(moduleName))(bot);
+			require("./../bot_modules/" + this.getModuleSourceCodePath(moduleName))(bot, arguments[2]);
 			console.log("Successfully loaded " + moduleName);
 			this.loadedModules.push(moduleName);
 		}
@@ -40,6 +41,7 @@ module.exports = {
 		/**
 		 * Get the module source code path and returns it
 		 * @param moduleName the name of the module
+		 * @return the module source code path
 		 **/
 		getModuleSourceCodePath(moduleName) {
 			var path = "";
@@ -61,6 +63,7 @@ module.exports = {
 		/**
 		 * Get the module commands.json file path
 		 * @param moduleName the name of the module
+		 * @return the module commands source path
 		**/
 		getModuleCommandsPath(moduleName) {
 			var path = this.getModuleSourceCodePath(moduleName);
@@ -68,7 +71,17 @@ module.exports = {
 		}
 
 		/**
+		 * Gets the module commands.json file
+		 * @param the module name
+		 * @return the module commands.json file
+		 **/
+		getModuleCommands(moduleName) {
+			return require("./../bot_modules/" + this.getModuleCommandsPath(moduleName));
+		}
+
+		/**
 		 * Refresh the modules in memory
+		 * @return Returns the module list file
 		**/
 		getModules(){
 			return require("./../bot_modules/modules.json");
@@ -76,6 +89,7 @@ module.exports = {
 
 		/**
 		 * Returns the list of modules in an array of module names;
+		 * @return the list of modules
 		 **/
 		listModules(){
 			var modules = [];
@@ -90,6 +104,7 @@ module.exports = {
 
 		/**
 		 * Get the module description and returns it
+		 * @return the module description
 		 **/
 		getModuleDescription(moduleName) {
 			var description = "";
@@ -112,6 +127,7 @@ module.exports = {
 		 * Check if the command can be found in the module
 		 * @param moduleNameArray the module name
 		 * @param commandName the name of the command
+		 * @return true if the command is in the module; false otherwise
 		**/
 		isCommandInModule(moduleName, commandName) {
 			var moduleCommandsFilePath = "./../bot_modules/" + this.getModuleCommandsPath(moduleName);
@@ -134,6 +150,7 @@ module.exports = {
 		 * Check if the command can be found in the modules in the module array
 		 * @param moduleNameArray Array containing all the module name
 		 * @param commandName the name of the command
+		 * @return true if the command is in a module of the array; false otherwise
 		**/
 		isCommandInModuleArray(moduleNameArray, commandName) {
 			var isInModuleArray = false;
