@@ -10,6 +10,7 @@ module.exports = function(bot) {
 
   var moduleLoader = arguments[1]["moduleLoader"];
   var Properties = arguments[1]["Properties"];
+
   //When the bot records a new message on the server
   bot.on('message', message => {
     //If the message is interpreted as a command to the bot
@@ -84,7 +85,8 @@ module.exports = function(bot) {
           if (moduleString == "") {
             moduleString = "None";
           }
-          reply += "\n";
+          reply += "\n\n";
+          reply += bot.user + " , The Hand of Justice ready to serve you !\n\n";
           reply += "Name : Tyr Bot\n";
           reply += "Description : " + Properties.description + "\n";
           reply += "Uptime : " + Utilities.millisecondsToString(bot.uptime) + "\n";
