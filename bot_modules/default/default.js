@@ -37,7 +37,6 @@ module.exports = function(bot) {
             for (var i = 0; i < cmd.getCommandParameters().length; i++) { //For every module passed
               try {
                 var moduleName = cmd.getCommandParameters()[i].parameterName; //get the passed
-                console.log(moduleLoader.loadedModules.indexOf(moduleName))
                 if (moduleLoader.loadedModules.indexOf(moduleName) > -1) { //Check if the module is already loaded
                   reply += "The module is already loaded";
                 } else { // Load the module if it is found
@@ -106,8 +105,8 @@ module.exports = function(bot) {
             response += MessageFormat.formatModuleNameHeader(moduleName);
             moduleCommands = moduleLoader.getModuleCommands(moduleName);
             for (var j in Object.keys(moduleCommands)) {
-              var currentCommand = Object.keys(moduleCommands)[i];
-              response += MessageFormat.formatCommand(moduleCommands[currentCommand]);
+              var currentCommand = moduleCommands[j];
+              response += MessageFormat.formatCommand(currentCommand);
             }
           }
 
@@ -180,8 +179,24 @@ module.exports = function(bot) {
           }
           break;
         default:
-          console.log("Use of command `" + cmd.getCommandName() + "` not recognized");
           break;
+
+      }
+
+      var command_recognized = false
+      for(var i = 0; i < moduleLoader.loadedModules.length; i++) {
+        var moduleName = moduleLoader.loadedModules[i];
+        response += MessageFormat.formatModuleNameHeader(moduleName);
+        var moduleCommands = moduleLoader.getModuleCommands(moduleName);
+        for (var j in Object.keys(moduleCommands)) {
+          var currentCommand = moduleCommands[j].name;
+          if (currentCommand == cmd.getCommandName()) {
+            command_recognized = true
+          }
+        }
+      }
+      if (!command_recognized) {
+        console.log("Use of command `" + cmd.getCommandName() + "` not recognized");
       }
     }
   });
