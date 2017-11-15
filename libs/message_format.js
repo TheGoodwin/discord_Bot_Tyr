@@ -34,7 +34,7 @@ module.exports = {
 	 * @param the module name
 	 **/
 	 formatModuleName : function(moduleName) {
-		 var str = "**"+moduleName+"**\n"
+		 var str = "** Module `"+moduleName+"` : **\n"
 		 return str;
 	 }
 }
