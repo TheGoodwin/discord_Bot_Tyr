@@ -1,7 +1,12 @@
 {
-    "0" : {
-        "path" : "basics/basics.js",
-        "name" : "basics",
-        "description" : "Module allowing the use of commands to the users"
-    }
+  "0" : {
+      "path" : "default/default.js",
+      "name" : "Default",
+      "description" : "Essential commands for the discord bot"
+  },
+  "1" : {
+      "path" : "basics/basics.js",
+      "name" : "basics",
+      "description" : "Module allowing the use of commands to the users"
+  }
 }
