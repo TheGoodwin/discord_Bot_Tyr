@@ -4,5 +4,3 @@ services:
     build: .
     volumes:
       - .:/usr/src/app
-    ports:
-      - "5858:5858"
