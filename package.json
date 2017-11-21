@@ -1,6 +1,6 @@
 {
   "name": "tyr-bot",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Bot for the Discord app",
   "main": "bot.js",
   "scripts": {
