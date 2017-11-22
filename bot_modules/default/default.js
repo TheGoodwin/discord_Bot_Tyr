@@ -155,7 +155,10 @@ module.exports = function(bot) {
               default: //The command marker is changed
                 if (param.isMention()) {
                   reply = "The command marker cannot be a mention";
-                } else {
+                } else if (param.length > 1) {
+                  reply = "The command marker cannot be longer than one character";
+                }
+                else {
                   Configuration.command_marker = cmd.getCommandParameters()[0].getParameterName();
                   reply = "Successfully changed the command marker to `" + cmd.getCommandParameters()[0].getParameterName() +
                     "`. You may now use it to launch other commands";
