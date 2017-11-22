@@ -1,4 +1,5 @@
 const ModuleNotFoundError = require("./../libs/errors.js").ModuleNotFoundError;
+const fs = require('fs');
 
 module.exports = {
 
@@ -13,6 +14,8 @@ module.exports = {
 		constructor() {
 
 			this.loadedModules = [];
+			this.path_modules = "./../bot_modules/";
+
 
 		}
 
@@ -23,7 +26,7 @@ module.exports = {
 		 **/
 		loadModule(moduleName,bot) {
 			if (!this.loadedModules.indexOf(moduleName) > -1) { //If the module is not already loaded
-				require("./../bot_modules/" + this.getModuleSourceCodePath(moduleName))(bot, arguments[2]);
+				require(this.path_modules + this.getModuleSourceCodePath(moduleName))(bot, arguments[2]);
 				console.log("Successfully loaded " + moduleName);
 				this.loadedModules.push(moduleName);
 			}
@@ -78,7 +81,7 @@ module.exports = {
 		 * @return the module commands.json file
 		 **/
 		getModuleCommands(moduleName) {
-			return require("./../bot_modules/" + this.getModuleCommandsPath(moduleName));
+			return require(this.path_modules + this.getModuleCommandsPath(moduleName));
 		}
 
 		/**
@@ -86,7 +89,7 @@ module.exports = {
 		 * @return Returns the module list file
 		**/
 		getModules(){
-			return require("./../bot_modules/modules.json");
+			return require(this.path_modules + "modules.json");
 		}
 
 		/**
@@ -132,7 +135,7 @@ module.exports = {
 		 * @return true if the command is in the module; false otherwise
 		**/
 		isCommandInModule(moduleName, commandName) {
-			var moduleCommandsFilePath = "./../bot_modules/" + this.getModuleCommandsPath(moduleName);
+			var moduleCommandsFilePath = this.path_modules + this.getModuleCommandsPath(moduleName);
 			var moduleCommands = require(moduleCommandsFilePath);
 
 			var isInModule = false;
